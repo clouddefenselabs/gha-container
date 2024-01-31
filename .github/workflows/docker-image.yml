@@ -24,7 +24,7 @@ jobs:
       -
         name: Build
         run: |
-          build --build-arg RUNNER_VERSION=2.312.0 --tag github-actions:2.312.0 .
+          docker build --build-arg RUNNER_VERSION=2.312.0 --tag github-actions:2.312.0 .
 
       - 
         name: Push docker image to DockerHub
