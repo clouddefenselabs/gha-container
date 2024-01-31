@@ -9,8 +9,8 @@ LABEL Author="Justin Johnson"
 LABEL Email="justin@initcyber.com"
 LABEL GitHub="https://github.com/initcyber"
 LABEL BaseImage="ubuntu:22.04"
-LABEL RunnerVersion=${RUNNER_VERSION}
-
+#LABEL RunnerVersion=${RUNNER_VERSION} 
+LABEL RunnerVersion=2.312.0
 # update the base packages + add a non-sudo user
 RUN apt-get update -y && apt-get upgrade -y && useradd -m docker
 
@@ -20,8 +20,8 @@ RUN apt-get install -y --no-install-recommends \
 
 # cd into the user directory, download and unzip the github actions runner
 RUN cd /home/docker && mkdir actions-runner && cd actions-runner \
-    && curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
-    && tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
+    && curl -O -L https://github.com/actions/runner/releases/download/v2.312.0/actions-runner-linux-x64-2.312.0.tar.gz \
+    && tar xzf ./actions-runner-linux-x64-2.312.0.tar.gz
 
 # install some additional dependencies
 RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
