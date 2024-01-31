@@ -2,7 +2,7 @@
 FROM ubuntu:20.04
 
 #input GitHub runner version argument
-ARG RUNNER_VERSION
+ARG RUNNER_VERSION=2.312.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL Author="Justin Johnson"
@@ -10,7 +10,7 @@ LABEL Email="justin@initcyber.com"
 LABEL GitHub="https://github.com/initcyber"
 LABEL BaseImage="ubuntu:20.04"
 LABEL RunnerVersion=${RUNNER_VERSION} 
-#LABEL RunnerVersion=2.312.0
+
 # update the base packages + add a non-sudo user
 RUN apt-get update -y && apt-get upgrade -y && useradd -m docker
 
