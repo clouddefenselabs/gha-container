@@ -14,7 +14,7 @@ Copy/clone this repository. Go through the code and change personal information.
 Build the container using:
 
 ```bash
-docker build --build-arg RUNNER_VERSION={{LATESTVERSIONOFRUNNER}} --tag {{WHATEVERYOUWANTTOTAGorNAMEIT}} (in my case initcyber/github-actions:(VersionOfRunner))
+docker build --build-arg RUNNER_VERSION={{LATESTVERSIONOFRUNNER}} --tag {{WHATEVERYOUWANTTOTAGorNAMEIT}} (in my case initcyber/github-actions:(VersionOfRunner)) .
 ```
 
 Then the newly created image will be available in your local image repository.
