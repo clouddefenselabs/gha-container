@@ -11,10 +11,12 @@ This folder contains a docker file and start shell script to create a docker con
 
 Copy/clone this repository. Go through the code and change personal information.
 
+Within the DockerFile - for ARG RUNNER_VERSION=xxxxx, replace the xxxx to whatever the newest version is, whatever version you want to pin to, or use "latest" if you dare.
+
 Build the container using:
 
 ```bash
-docker build --build-arg RUNNER_VERSION={{LATESTVERSIONOFRUNNER}} --tag {{WHATEVERYOUWANTTOTAGorNAMEIT}} (in my case initcyber/github-actions:(VersionOfRunner)) .
+docker build --tag {{Name/Repo:Version typically if using Docker Hub}} (in my case initcyber/github-actions:(VersionOfRunner)) .
 ```
 
 Then the newly created image will be available in your local image repository.
@@ -35,8 +37,8 @@ docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 Push this image to the container repository of your choice. I have a public copy at Docker Hub (Here)[https://hub.docker.com/r/initcyber/github-actions] but I use Nexus primarily. 
 
 ```bash
-docker push devop.home.initcyber.com:9001/docker/github-actions
+docker push initcyber/github-actions:tag
 ```
 
 ## Docker Compose File Template
-See attached Docker Compose file template which you can use assuming you have uploaded it to your own Docker Hub registry.
+See attached Docker Compose file template which you can use assuming you have uploaded it to your own Docker Hub registry. You can use mine too if you want, No guarentees on it.
