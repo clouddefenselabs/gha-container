@@ -28,5 +28,4 @@ jobs:
       - 
         name: Push docker image to DockerHub
         run: |
-          docker load < result
           docker push initcyber/github-actions:2.312.0
