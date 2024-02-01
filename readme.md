@@ -1,13 +1,17 @@
+# Github Actions Runner - Docker Container
+This folder contains a docker file and start shell script to create a docker container for a self-hosted GitHub Actions Runner.
+
+<center>
+![GitHub Repo stars](https://img.shields.io/github/stars/initcyber/gha-container)
+![GitHub forks](https://img.shields.io/github/forks/initcyber/gha-container)
 ![GitHub PR's](https://img.shields.io/github/issues-pr/initcyber/gha-container)
 ![GitHub issues](https://img.shields.io/github/issues/initcyber/gha-container)
 ![GitHub last commit](https://img.shields.io/github/last-commit/initcyber/gha-container)
 ![GitHub contributors](https://img.shields.io/github/contributors/initcyber/gha-container)
-![GitHub Repo stars](https://img.shields.io/github/stars/initcyber/gha-container)
-![GitHub forks](https://img.shields.io/github/forks/initcyber/gha-container)
+</center>
 
 
-# Github Actions Runner - Docker Container
-This folder contains a docker file and start shell script to create a docker container for a self-hosted GitHub Actions Runner.
+
 
 
 # Assumptions:
