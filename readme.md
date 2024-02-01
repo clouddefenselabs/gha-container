@@ -34,7 +34,7 @@ docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 ```
 
 #### Optional
-Push this image to the container repository of your choice. I have a public copy at Docker Hub (Here)[https://hub.docker.com/r/initcyber/github-actions] but I use Nexus primarily. 
+Push this image to the container repository of your choice. I have a public copy at Docker Hub [Here](https://hub.docker.com/r/initcyber/github-actions) but I use Nexus primarily. 
 
 ```bash
 docker push initcyber/github-actions:tag
