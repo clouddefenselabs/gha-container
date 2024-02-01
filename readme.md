@@ -7,7 +7,7 @@ This folder contains a docker file and start shell script to create a docker con
 
 <div align='center'>
 
-
+<a href="https://semgrep.dev/"> <img src="https://img.shields.io/badge/Trivy_status-Monitored-aqua" alt="trivytatus"></a>
 ![GitHub Repo stars](https://img.shields.io/github/stars/initcyber/gha-container)
 ![GitHub forks](https://img.shields.io/github/forks/initcyber/gha-container)
 ![GitHub PR's](https://img.shields.io/github/issues-pr/initcyber/gha-container)
