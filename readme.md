@@ -14,6 +14,8 @@ This folder contains a docker file and start shell script to create a docker con
 ![GitHub issues](https://img.shields.io/github/issues/initcyber/gha-container)
 ![GitHub last commit](https://img.shields.io/github/last-commit/initcyber/gha-container)
 ![GitHub contributors](https://img.shields.io/github/contributors/initcyber/gha-container)
+![Docker Pulls](https://img.shields.io/docker/pulls/initcyber/github-actions)
+
 
 </div>
 
