@@ -51,4 +51,4 @@ jobs:
             This is the docker image security scanning report
           branch: trivy/daily-report
           base: main
-#Borrowed from https://blog.mergify.com/level-up-your-docker-security-uncover-mergifys-battle-tested-workflow-for-container-image-scanning/
+# Borrowed from https://blog.mergify.com/level-up-your-docker-security-uncover-mergifys-battle-tested-workflow-for-container-image-scanning/
