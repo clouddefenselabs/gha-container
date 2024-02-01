@@ -1,0 +1,54 @@
+name: Scan docker image
+permissions: read-all
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  docker-image-security-scan:
+    timeout-minutes: 10
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download latest image
+        run: docker pull initcyber/github-actions:2.312.0
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "initcyber/github-actions:2.312.0"
+          format: "json"
+          security-checks: "vuln"
+          output: "docker-security-scan.json.tmp"
+
+      - name: Keep only the results section
+        id: update
+        run: |
+          BEFORE="$(jq '.[].Vulnerabilities|length' < docker-security-scan.json)"
+          jq --raw-output '.Results | del(.[].Vulnerabilities[].Layer) | del(.[].Vulnerabilities[].LastModifiedDate)' docker-security-scan.json.tmp > docker-security-scan.json
+          rm -f docker-security-scan.json.tmp
+          AFTER="$(jq '.[].Vulnerabilities|length' < docker-security-scan.json)"
+          if [[ $BEFORE -lt $AFTER ]]; then
+            echo "labels=new CVE" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create the Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          author: mergify-ci-bot <mergify-ci-bot@users.noreply.github.com>
+          title: "chore(docker): image security scanning report"
+          labels: ${{ steps.update.outputs.labels }}
+          body: >
+            This is the docker image security scanning report
+          branch: trivy/daily-report
+          base: main
+#Borrowed from https://blog.mergify.com/level-up-your-docker-security-uncover-mergifys-battle-tested-workflow-for-container-image-scanning/
