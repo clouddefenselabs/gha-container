@@ -17,7 +17,7 @@ RUN apt-get update -y && apt-get upgrade -y && useradd -m docker
 #### This is to fix CVE-2019-0981 - 
 #### Ubuntu 20.04 ships with azure-cli pre-installed and is outdated per https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux
 #### Creating a PR for now to test this fix
-RUN apt-get remove azure-cli -y && sudo apt-get autoremove -y
+RUN apt-get remove azure-cli -y &&  apt-get autoremove -y
 
 # install the packages and dependencies along with jq so we can parse JSON (add additional packages as necessary)
 RUN apt-get install -y --no-install-recommends curl nodejs wget unzip vim git azure-cli jq build-essential libssl-dev libffi-dev python3 python3-venv python3-dev python3-pip
