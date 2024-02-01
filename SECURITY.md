@@ -5,10 +5,13 @@ The security of my projects is very important to me.  While a lot of code I post
 Please contact me as soon as possible if you find any security vulnerabilities or have any security-related questions about this repository. I am grateful for your responsible disclosure of the issue and I will try my best to resolve it quickly.
 
 **Please do not report security vulnerabilities through public GitHub issues.**
+
 ---
+
 ## Preferred Languages
 
 I prefer all communications to be in English (please).
+
 ---
 ## Reporting a Vulnerability
 
@@ -21,6 +24,7 @@ If you find a security vulnerability, please do the following:
 5. Send the report.
 
 I will receive a private notification and start looking into the reported vulnerability as soon as possible. Please keep the vulnerability confidential and do not share it with anyone else until I have resolved the issue.
+
 ---
 ## Scope
 
