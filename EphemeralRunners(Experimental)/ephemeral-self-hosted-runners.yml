@@ -1,0 +1,84 @@
+name: Ephemeral Self-Hosted Runners #This relies on Docker Compose File
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  OWNER: ${{ github.actor }}
+  REPO: ${{ github.event.repository.name }}
+  TOKEN: ${{ secrets.PAT_TOKEN }} #Add this as Github Secret - PAT Token
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+############## Uncomment below if you want to use Tailscale and adjust as necessary #########################
+      #- name: Tailscale
+      #  uses: tailscale/github-action@v2
+      #  with:
+      #    oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+      #    oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+      #    tags: tag:ci
+
+      - name: Upload new Docker Compose File
+        uses: appleboy/scp-action@master
+        with:
+          user: # Your user
+          host: # Your host IP or hostname
+          key: ${{ secrets.SSH_KEY }} #Add this as Github Secret - SSH Key in RAW format
+          source: './docker-compose.yml' #Change this to the path of your docker-compose file
+          target: '/home/$USER/githubrunner/' #Adjust accordingly
+          #strip_components: 0 #optional - only needed if your docker-compose file is located in a subdirectory
+
+      - name: Start Docker Container
+        uses: fifsky/ssh-action@master
+        with:
+          user: # Your user
+          host: # Your host IP or hostname
+          key: ${{ secrets.SSH_KEY }}
+          command: |
+            cd /home/justin/githubrunner
+            export OWNER=${{ github.actor }}
+            export REPO=${{ github.event.repository.name }}
+            export TOKEN=${{ secrets.PAT_TOKEN }}
+            docker compose up -d --force-recreate
+###### Your Payload goes here  #####            
+  payload:
+    runs-on: "self-hosted"
+    needs: deploy
+    steps:
+      - run: |
+          touch payload.txt
+
+
+##### end Payload Here #####
+
+
+  teardown: # This tears down the runner so that its "Ephemeral"
+    runs-on: ubuntu-latest
+    needs: payload
+    if: always() #This job will run regardless if the previous job succeeds or fails
+
+############## Uncomment below if you want to use Tailscale and adjust as necessary #########################
+      #- name: Tailscale
+      #  uses: tailscale/github-action@v2
+      #  with:
+      #    oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+      #    oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+      #    tags: tag:ci
+
+      - name: Stop Docker Container
+        uses: fifsky/ssh-action@master
+        with:
+          user: # Your user
+          host: # Your host IP or hostname
+          key: ${{ secrets.SSH_KEY }}
+          command: |
+            cd /home/justin/githubrunner
+            docker compose down

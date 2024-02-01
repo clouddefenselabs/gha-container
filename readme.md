@@ -167,5 +167,11 @@ memory: 128M # Changeable
 ```
 Just like a Virtual Machine, you can over-provision the CPU's, don't over-provision the memory or you will get "Out of Memory" issues.
 
+## ‼️ Ephemeral Self Hosted Runners ‼️ ##
+I have added a GitHub actions workflow template that allows users to spin up (in their repository) ephemeral runners. This is located [here](EphemeralRunners(Experimental)/ephemeral-self-hosted-runners.yml). Copy this file to your .GitHub/workflows and adjust accordingly (mostly the Payload part and tail scale if you use it). 
+
+Of course you can always adjust this to use a particular SelfHosted github runner that acts as a sort of ‘Bastion’ to spin up the ephemeral docker GitHub action containers for your environment, barring that this ‘bastion’ runner is secured appropriately. (e.g. have a runner on the machine installed directly on the host, that spins up the ephemeral containers on the same host machine.) Diagram below⬇️ 
+
+![actions](actions.png)
 ## 👮 Security Scanning (this particular repository) 👮
 I use [Trivy GitHub Actions](https://github.com/aquasecurity/trivy-action) to build and scan the container periodically and upload any known vulnerabilitys. I'll publish anything I find [here](https://github.com/initcyber/gha-container/security) if it can't be remediated immediately (i.e. if it's a critical finding, and actively exploited. I will more than likely also be removing the runners immediately following that nifty docker command above). Realistically, it will be reliant upon the upstream found in [GitHub's Action Runner](https://github.com/actions/runner/) to make a majority of the fixes however.
