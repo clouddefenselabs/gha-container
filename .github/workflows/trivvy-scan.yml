@@ -42,7 +42,7 @@ jobs:
 
       - name: Create the Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v6
         with:
           author: mergify-ci-bot <mergify-ci-bot@users.noreply.github.com>
           title: "chore(docker): image security scanning report"
