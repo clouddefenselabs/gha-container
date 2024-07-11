@@ -46,23 +46,6 @@ jobs:
     needs: buildandscan
     runs-on: ubuntu-latest
     steps:
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          # list of Docker images to use as base name for tags
-          images: |
-            name/app
-            ghcr.io/username/app            
-          # generate Docker tags based on the following events/attributes
-          tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha  
       - name: Checkout
         uses: actions/checkout@v4
       - name: Login to Docker Hub
@@ -78,4 +61,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/github-actions:${{ steps.meta.outputs.tags }} , ${{ secrets.DOCKER_USERNAME }}/github-actions:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/github-actions:v0.1.0-beta , ${{ secrets.DOCKER_USERNAME }}/github-actions:latest
