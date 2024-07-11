@@ -8,14 +8,14 @@ name: trivy
 on:
   push:
     branches: [ "main" ]
+    paths:
+    - ./Dockerfile
+    - scripts/** 
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
   schedule:
     - cron: '15 17 * * 5'
-  paths:
-    - ./Dockerfile
-    - scripts/** 
 
 permissions:
   contents: read
