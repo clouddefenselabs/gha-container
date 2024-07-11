@@ -36,3 +36,5 @@ USER docker
 
 # set the entrypoint to the start.sh script
 ENTRYPOINT ["./start.sh"]
+
+###Last checked 7/11/24
