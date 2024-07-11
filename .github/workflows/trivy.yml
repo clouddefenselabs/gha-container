@@ -13,6 +13,9 @@ on:
     branches: [ "main" ]
   schedule:
     - cron: '15 17 * * 5'
+  paths:
+    - ./Dockerfile
+    - scripts/** 
 
 permissions:
   contents: read
@@ -46,3 +49,23 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/github-actions:2.312.0 , ${{ secrets.DOCKER_USERNAME }}/github-actions:latest
