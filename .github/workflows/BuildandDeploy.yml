@@ -78,4 +78,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ steps.meta.outputs.tags }} , ${{ secrets.DOCKER_USERNAME }}/github-actions:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/github-actions:${{ steps.meta.outputs.tags }} , ${{ secrets.DOCKER_USERNAME }}/github-actions:latest
