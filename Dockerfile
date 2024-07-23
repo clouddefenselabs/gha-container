@@ -2,7 +2,7 @@
 FROM ubuntu:20.04
 
 #input GitHub runner version argument
-ARG RUNNER_VERSION=2.312.0
+ARG RUNNER_VERSION=2.317.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL Author="Justin Johnson"
